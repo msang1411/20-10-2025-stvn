@@ -26,7 +26,12 @@ function doPost(e) {
         gameResult.date,
       ]);
 
-      sheet.getRange("A:A").setNumberFormat("dd/MM/yyyy HH:mm:ss");
+      const lastRow = sheet.getLastRow();
+      if (lastRow >= 2) {
+        sheet
+          .getRange(2, 1, lastRow - 1, 1)
+          .setNumberFormat("dd/MM/yyyy HH:mm:ss");
+      }
 
       return ContentService.createTextOutput(
         JSON.stringify({
