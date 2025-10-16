@@ -361,6 +361,7 @@ async function endGame() {
   leaderboard.push(newEntry);
   localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
 
+  showNotification("Đang tạo thiệp, xin hãy chờ ít phút 💖.", "success");
   // Gửi lên Google Sheets (backup) - không chờ, để redirect nhanh
   if (GOOGLE_SHEETS_CONFIG.enabled) {
     await sendToGoogleSheets(newEntry).catch(() => {});
@@ -572,4 +573,52 @@ async function getLeaderboardFromGoogleSheets() {
   const localData = JSON.parse(localStorage.getItem("leaderboard")) || [];
   console.log("Sử dụng dữ liệu từ localStorage:", localData);
   return localData;
+}
+
+function showNotification(message, type = "info") {
+  // Create notification element
+  const notification = document.createElement("div");
+  notification.className = `notification notification-${type}`;
+  notification.innerHTML = `
+        <div class="notification-content">
+            <span class="notification-message">${message}</span>
+            <button class="notification-close" onclick="this.parentElement.parentElement.remove()">×</button>
+        </div>
+    `;
+
+  // Add styles
+  notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${
+          type === "success"
+            ? "#4CAF50"
+            : type === "error"
+            ? "#f44336"
+            : "#2196F3"
+        };
+        color: white;
+        padding: 15px 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        z-index: 1000;
+        animation: slideIn 0.3s ease-out;
+        max-width: 300px;
+    `;
+
+  // Add to page
+  document.body.appendChild(notification);
+
+  // Auto remove after 5 seconds
+  setTimeout(() => {
+    if (notification.parentNode) {
+      notification.style.animation = "slideOut 0.3s ease-in";
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.parentNode.removeChild(notification);
+        }
+      }, 300);
+    }
+  }, 5000);
 }
