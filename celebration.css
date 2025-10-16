@@ -1,0 +1,695 @@
+/* Celebration Card Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.celebration-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+}
+
+/* Floating Hearts Animation */
+.floating-hearts {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.heart {
+  position: absolute;
+  font-size: 2rem;
+  animation: float 6s ease-in-out infinite;
+  opacity: 0.7;
+}
+
+.heart:nth-child(1) {
+  left: 10%;
+  animation-delay: 0s;
+  animation-duration: 6s;
+}
+
+.heart:nth-child(2) {
+  left: 20%;
+  animation-delay: 1s;
+  animation-duration: 7s;
+}
+
+.heart:nth-child(3) {
+  left: 30%;
+  animation-delay: 2s;
+  animation-duration: 8s;
+}
+
+.heart:nth-child(4) {
+  left: 40%;
+  animation-delay: 3s;
+  animation-duration: 6s;
+}
+
+.heart:nth-child(5) {
+  left: 50%;
+  animation-delay: 4s;
+  animation-duration: 7s;
+}
+
+.heart:nth-child(6) {
+  left: 60%;
+  animation-delay: 5s;
+  animation-duration: 8s;
+}
+
+.heart:nth-child(7) {
+  left: 70%;
+  animation-delay: 1.5s;
+  animation-duration: 6s;
+}
+
+.heart:nth-child(8) {
+  left: 80%;
+  animation-delay: 2.5s;
+  animation-duration: 7s;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Main Celebration Card */
+.celebration-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 30px;
+  padding: 40px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(20px);
+  border: 3px solid rgba(255, 107, 157, 0.3);
+  max-width: 800px;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  animation: cardAppear 1s ease-out;
+}
+
+@keyframes cardAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Card Header */
+.card-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.celebration-icon {
+  font-size: 4rem;
+  color: #ff6b9d;
+  margin-bottom: 20px;
+  animation: heartbeat 2s infinite;
+}
+
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.card-header h1 {
+  color: #333;
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ff6b9d, #ff8fab);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Character Section */
+.character-section {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 107, 157, 0.1),
+    rgba(255, 143, 171, 0.1)
+  );
+  border-radius: 20px;
+  border: 2px solid rgba(255, 107, 157, 0.2);
+}
+
+.character-image {
+  position: relative;
+  flex-shrink: 0;
+  width: 220px; /* base width */
+  aspect-ratio: 9/16; /* portrait 9:16 */
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #0b1220, #08101a);
+  box-shadow: 0 10px 35px rgba(2, 6, 23, 0.25);
+}
+
+.character-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  transform: scale(1.02);
+  transition: transform 0.6s ease;
+}
+
+@keyframes photoGlow {
+  0%,
+  100% {
+    filter: saturate(105%);
+  }
+  50% {
+    filter: saturate(115%);
+  }
+}
+
+.image-frame {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 2px; /* border thickness */
+  background: conic-gradient(from 90deg, #ff6bcb, #7c6bff, #ffd27a, #ff6bcb);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  filter: blur(6px) saturate(130%);
+  opacity: 0.9;
+}
+
+@keyframes frameRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* hover effect for subtle depth */
+.character-image {
+  transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.2, 1),
+    box-shadow 0.6s ease;
+  animation: glowPulse 4.5s ease-in-out infinite;
+}
+.character-image:hover {
+  transform: translateY(-4px);
+}
+.character-image:hover .character-photo {
+  transform: scale(1.07);
+}
+
+/* floating hearts near the frame (no HTML changes) */
+.character-image::before,
+.character-image::after {
+  content: "❤";
+  position: absolute;
+  color: rgba(255, 105, 180, 0.9);
+  font-size: 18px;
+  filter: drop-shadow(0 2px 6px rgba(255, 105, 180, 0.35));
+  pointer-events: none;
+  opacity: 0;
+}
+.character-image::before {
+  left: 8%;
+  bottom: -16px;
+  animation: floatHeart 5.5s linear infinite;
+}
+.character-image::after {
+  left: 78%;
+  bottom: -12px;
+  animation: floatHeart 6.8s linear infinite 0.9s;
+  font-size: 15px;
+}
+
+/* additional hearts from the photo layer for higher density */
+.character-photo::before,
+.character-photo::after {
+  content: "❤";
+  position: absolute;
+  color: rgba(255, 105, 180, 0.92);
+  font-size: 16px;
+  filter: drop-shadow(0 2px 6px rgba(255, 105, 180, 0.35));
+  pointer-events: none;
+  opacity: 0;
+}
+.character-photo::before {
+  left: 28%;
+  bottom: -18px;
+  animation: floatHeart 6.2s linear infinite 0.3s;
+}
+.character-photo::after {
+  left: 58%;
+  bottom: -20px;
+  animation: floatHeart 5.8s linear infinite 1.6s;
+  font-size: 20px;
+}
+
+@keyframes floatHeart {
+  0% {
+    transform: translateY(0) scale(0.8);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-180px) scale(1.05);
+    opacity: 0;
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    box-shadow: 0 10px 35px rgba(2, 6, 23, 0.25);
+  }
+  50% {
+    box-shadow: 0 14px 48px rgba(2, 6, 23, 0.32);
+  }
+}
+
+/* Hearts inside the 9:16 frame (HTML layer .hearts-inside) */
+.hearts-inside {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.hearts-inside .hi {
+  position: absolute;
+  opacity: 0.95;
+  color: rgba(255, 105, 180, 0.95);
+  text-shadow: 0 2px 8px rgba(255, 105, 180, 0.35);
+}
+.hearts-inside .hi1 {
+  left: 10%;
+  bottom: -24px;
+  font-size: 16px;
+  animation: floatHeart 6s linear infinite;
+}
+.hearts-inside .hi2 {
+  left: 32%;
+  bottom: -28px;
+  font-size: 14px;
+  animation: floatHeart 6.8s linear infinite 0.6s;
+}
+.hearts-inside .hi3 {
+  left: 56%;
+  bottom: -22px;
+  font-size: 18px;
+  animation: floatHeart 5.8s linear infinite 1.2s;
+}
+.hearts-inside .hi4 {
+  left: 74%;
+  bottom: -26px;
+  font-size: 15px;
+  animation: floatHeart 7s linear infinite 1.8s;
+}
+.hearts-inside .hi5 {
+  left: 22%;
+  bottom: -20px;
+  font-size: 12px;
+  animation: floatHeart 6.2s linear infinite 2.4s;
+}
+.hearts-inside .hi6 {
+  left: 86%;
+  bottom: -24px;
+  font-size: 20px;
+  animation: floatHeart 5.6s linear infinite 3.1s;
+}
+
+.character-info {
+  flex: 1;
+}
+
+.character-info h2 {
+  font-size: 2.2rem;
+  color: #333;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.character-role {
+  font-size: 1.3rem;
+  color: #666;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.achievement-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+  animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Celebration Message */
+.celebration-message {
+  margin-bottom: 30px;
+}
+
+.message-box {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.9),
+    rgba(248, 249, 250, 0.9)
+  );
+  padding: 30px;
+  border-radius: 20px;
+  border: 2px solid rgba(255, 107, 157, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.message-box h3 {
+  color: #ff6b9d;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.celebration-text {
+  color: #333;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  text-align: center;
+  font-weight: 400;
+}
+
+/* Celebration Actions */
+.celebration-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.btn-celebration,
+.btn-share,
+.btn-back {
+  padding: 15px 25px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+/* Play Music button */
+.btn-music {
+  padding: 15px 25px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  background: linear-gradient(135deg, #7c6bff, #ff6bcb);
+  box-shadow: 0 10px 20px rgba(124, 107, 255, 0.28);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+
+.btn-music i { animation: notePulse 1.2s ease-in-out infinite; }
+
+.btn-music:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(124, 107, 255, 0.35);
+  filter: saturate(115%);
+}
+
+@keyframes notePulse {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-2px); opacity: .9; }
+}
+
+.btn-celebration {
+  background: linear-gradient(135deg, #ff6b9d, #ff8fab);
+  color: white;
+  box-shadow: 0 10px 20px rgba(255, 107, 157, 0.3);
+}
+
+.btn-celebration:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(255, 107, 157, 0.4);
+}
+
+.btn-share {
+  background: linear-gradient(135deg, #4caf50, #66bb6a);
+  color: white;
+  box-shadow: 0 10px 20px rgba(76, 175, 80, 0.3);
+}
+
+.btn-share:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(76, 175, 80, 0.4);
+}
+
+.btn-back {
+  background: linear-gradient(135deg, #a8edea, #fed6e3);
+  color: #333;
+  box-shadow: 0 10px 20px rgba(168, 237, 234, 0.3);
+}
+
+.btn-back:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(168, 237, 234, 0.4);
+}
+
+/* Celebration Footer */
+.celebration-footer {
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.celebration-footer p {
+  margin-bottom: 5px;
+}
+
+/* Confetti Animation */
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #ff6b9d;
+  animation: confettiFall 3s linear infinite;
+}
+
+.confetti:nth-child(1) {
+  left: 10%;
+  animation-delay: 0s;
+  background: #ff6b9d;
+}
+
+.confetti:nth-child(2) {
+  left: 20%;
+  animation-delay: 0.5s;
+  background: #ff8fab;
+}
+
+.confetti:nth-child(3) {
+  left: 30%;
+  animation-delay: 1s;
+  background: #ffd700;
+}
+
+.confetti:nth-child(4) {
+  left: 40%;
+  animation-delay: 1.5s;
+  background: #4caf50;
+}
+
+.confetti:nth-child(5) {
+  left: 50%;
+  animation-delay: 2s;
+  background: #2196f3;
+}
+
+.confetti:nth-child(6) {
+  left: 60%;
+  animation-delay: 2.5s;
+  background: #9c27b0;
+}
+
+.confetti:nth-child(7) {
+  left: 70%;
+  animation-delay: 0.3s;
+  background: #ff9800;
+}
+
+.confetti:nth-child(8) {
+  left: 80%;
+  animation-delay: 0.8s;
+  background: #e91e63;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .celebration-container {
+    padding: 10px;
+  }
+
+  .celebration-card {
+    padding: 20px;
+  }
+
+  .card-header h1 {
+    font-size: 2rem;
+  }
+
+  .character-section {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .character-image {
+    width: 180px;
+  }
+
+  .character-info h2 {
+    font-size: 1.8rem;
+  }
+
+  .character-role {
+    font-size: 1.1rem;
+  }
+
+  .celebration-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn-celebration,
+  .btn-share,
+  .btn-back {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+
+  .message-box {
+    padding: 20px;
+  }
+
+  .celebration-text {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .character-image {
+    width: 250px;
+  }
+
+  .character-info h2 {
+    font-size: 1.5rem;
+  }
+
+  .celebration-text {
+    font-size: 0.9rem;
+  }
+}

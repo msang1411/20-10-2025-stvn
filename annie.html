@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🌸 Chúc mừng Annie - Phi hành gia 🌸</title>
+    <link rel="stylesheet" href="celebration.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="celebration-container">
+      <div class="floating-hearts">
+        <div class="heart">💖</div>
+        <div class="heart">🌸</div>
+        <div class="heart">💕</div>
+        <div class="heart">🌺</div>
+        <div class="heart">💗</div>
+        <div class="heart">🌷</div>
+        <div class="heart">💖</div>
+        <div class="heart">🌸</div>
+      </div>
+
+      <div class="celebration-card">
+        <div class="card-header">
+          <div class="celebration-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <h1>🎉 Chúc mừng ngày 20/10! 🎉</h1>
+        </div>
+
+        <div class="character-section">
+          <div class="character-image">
+            <img
+              src="assets/imgs/annie.jpeg"
+              alt="Annie - Phi hành gia"
+              class="character-photo"
+            />
+            <div class="hearts-inside" aria-hidden="true">
+              <i class="hi hi1">❤</i>
+              <i class="hi hi2">❤</i>
+              <i class="hi hi3">❤</i>
+              <i class="hi hi4">❤</i>
+              <i class="hi hi5">❤</i>
+              <i class="hi hi6">❤</i>
+            </div>
+            <div class="image-frame"></div>
+          </div>
+          <div class="character-info">
+            <h2>Annie</h2>
+            <p class="character-role">👩‍🚀 Quality Assurance (QA)</p>
+            <div class="achievement-badge">
+              <i class="fas fa-trophy"></i>
+              <span>Hoàn thành Quiz 20/10</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="celebration-message">
+          <div class="message-box">
+            <h3>🌸 Lời chúc dành cho Annie 🌸</h3>
+            <p class="celebration-text">
+              <div style="text-align: justify">
+                Gửi em lời chúc nhân ngày Phụ nữ Việt Nam: Chúc em luôn xinh đẹp, yêu đời, 
+                thành công trong sự nghiệp và hạnh phúc trong cuộc sống. 
+                Hy vọng em sẽ gặt hái được nhiều thành công và có thật nhiều khoảnh khắc vui vẻ, ý nghĩa. 
+                Chúc em 20/10 thật nhiều niềm vui, sức khỏe dồi dào và luôn được yêu thương !
+              </div>
+            </p>
+          </div>
+        </div>
+
+        <div class="celebration-actions">
+          <button class="btn-music" onclick="playCelebrationSound()">
+            <i class="fas fa-music"></i>
+            Nghe nhạc
+          </button>
+          <button class="btn-share" onclick="shareCelebration()">
+            <i class="fas fa-share"></i>
+            Chia sẻ thiệp
+          </button>
+        </div>
+
+        <div class="celebration-footer">
+          <p>🌸 Chúc mừng ngày Phụ nữ Việt Nam 20/10 🌸</p>
+          <p>Made with 💖 for amazing women</p>
+        </div>
+      </div>
+
+      <div class="confetti-container">
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+      </div>
+    </div>
+
+    <audio id="celebrationMusic" loop>
+      <source src="assets/music/annie.mp3" type="audio/mpeg" />
+    </audio>
+
+    <script src="celebration.js"></script>
+  </body>
+</html>
