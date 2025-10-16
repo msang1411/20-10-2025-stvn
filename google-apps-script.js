@@ -3,7 +3,17 @@
 
 function doPost(e) {
   try {
-    const data = JSON.parse(e.postData.contents);
+    let data;
+    if (e.postData.type === "application/json") {
+      data = JSON.parse(e.postData.contents);
+    } else {
+      // Nếu iOS gửi form-urlencoded
+      const params = e.parameter;
+      data = {
+        action: params.action,
+        data: JSON.parse(params.data),
+      };
+    }
 
     if (data.action === "addGameResult") {
       const gameResult = data.data;
