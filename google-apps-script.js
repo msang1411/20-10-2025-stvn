@@ -13,9 +13,11 @@ function doPost(e) {
         "1Tp3CwP24lYqfLwKqEqbrpk1g9lqDMmjOiKC9G1v2pK4"
       ).getActiveSheet();
 
+      const timestamp = new Date(gameResult.timestamp);
+
       // Thêm dữ liệu vào sheet
       sheet.appendRow([
-        gameResult.timestamp,
+        timestamp,
         gameResult.name,
         gameResult.character,
         gameResult.correct,
@@ -23,6 +25,8 @@ function doPost(e) {
         gameResult.score,
         gameResult.date,
       ]);
+
+      sheet.getRange("A:A").setNumberFormat("dd/MM/yyyy HH:mm:ss");
 
       return ContentService.createTextOutput(
         JSON.stringify({
