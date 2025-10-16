@@ -363,7 +363,7 @@ async function endGame() {
 
   // Gửi lên Google Sheets (backup) - không chờ, để redirect nhanh
   if (GOOGLE_SHEETS_CONFIG.enabled) {
-    sendToGoogleSheets(newEntry).catch(() => {});
+    await sendToGoogleSheets(newEntry).catch(() => {});
   }
 
   // Chuyển hướng đến thiệp chúc mừng thay vì hiển thị màn hình kết quả
@@ -519,7 +519,7 @@ function getCelebrationCardHref(name) {
 // Google Sheets Integration Functions
 async function sendToGoogleSheets(gameResult) {
   try {
-    const response = await fetch(GOOGLE_SHEETS_CONFIG.scriptUrl, {
+    await fetch(GOOGLE_SHEETS_CONFIG.scriptUrl, {
       method: "POST",
       mode: "no-cors", // Cần thiết cho Google Apps Script
       headers: {
