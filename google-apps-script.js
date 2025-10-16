@@ -13,12 +13,15 @@ function doPost(e) {
         "1Tp3CwP24lYqfLwKqEqbrpk1g9lqDMmjOiKC9G1v2pK4"
       ).getActiveSheet();
 
-      const timestampUTC = new Date(gameResult.timestamp); // string ISO → Date object UTC
-      const timestampVN = new Date(timestampUTC.getTime() + 7 * 60 * 60 * 1000);
+      const formattedTime = Utilities.formatDate(
+        new Date(gameResult.timestamp),
+        "Asia/Ho_Chi_Minh",
+        "dd/MM/yyyy HH:mm:ss"
+      );
 
       // Thêm dữ liệu vào sheet
       sheet.appendRow([
-        timestampVN,
+        formattedTime,
         gameResult.name,
         gameResult.character,
         gameResult.correct,
