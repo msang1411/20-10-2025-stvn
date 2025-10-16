@@ -13,11 +13,12 @@ function doPost(e) {
         "1Tp3CwP24lYqfLwKqEqbrpk1g9lqDMmjOiKC9G1v2pK4"
       ).getActiveSheet();
 
-      const timestamp = new Date(gameResult.timestamp);
+      const timestampUTC = new Date(gameResult.timestamp); // string ISO → Date object UTC
+      const timestampVN = new Date(timestampUTC.getTime() + 7 * 60 * 60 * 1000);
 
       // Thêm dữ liệu vào sheet
       sheet.appendRow([
-        timestamp,
+        timestampVN,
         gameResult.name,
         gameResult.character,
         gameResult.correct,
@@ -25,13 +26,6 @@ function doPost(e) {
         gameResult.score,
         gameResult.date,
       ]);
-
-      const lastRow = sheet.getLastRow();
-      if (lastRow >= 2) {
-        sheet
-          .getRange(2, 1, lastRow - 1, 1)
-          .setNumberFormat("dd/MM/yyyy HH:mm:ss");
-      }
 
       return ContentService.createTextOutput(
         JSON.stringify({
