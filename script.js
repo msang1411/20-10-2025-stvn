@@ -321,6 +321,17 @@ function timeUp() {
   }, delayMs);
 }
 
+function getFormattedNow() {
+  const now = new Date();
+  const d = String(now.getDate()).padStart(2, "0");
+  const m = String(now.getMonth() + 1).padStart(2, "0");
+  const y = now.getFullYear();
+  const h = String(now.getHours()).padStart(2, "0");
+  const min = String(now.getMinutes()).padStart(2, "0");
+  const s = String(now.getSeconds()).padStart(2, "0");
+  return `${d}/${m}/${y} ${h}:${min}:${s}`;
+}
+
 async function endGame() {
   const endTime = Date.now();
   const totalTime = Math.round((endTime - startTime) / 1000);
@@ -343,7 +354,7 @@ async function endGame() {
     time: totalTime,
     score: Math.max(0, score),
     date: new Date().toLocaleDateString(),
-    timestamp: new Date().toISOString(),
+    timestamp: getFormattedNow(),
   };
 
   // Lưu vào localStorage (nguồn chính)
