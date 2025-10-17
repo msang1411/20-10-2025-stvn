@@ -65,7 +65,7 @@ const SHARED_QUESTIONS = [
   {
     question:
       "Có bao nhiêu chữ C trong câu sau đây: “ Cơm, canh, cháo gì tớ cũng thích ăn!”",
-    options: ["9", "4", "1", "0"],
+    options: ["9", "4", "1", "5"],
     correct: 2, // 1 chữ C viết hoa
   },
 ];
@@ -332,14 +332,6 @@ function getFormattedNow() {
   return `${d}/${m}/${y} ${h}:${min}:${s}`;
 }
 
-function showLoading() {
-  document.getElementById("loading-overlay").style.display = "flex";
-}
-
-function hideLoading() {
-  document.getElementById("loading-overlay").style.display = "none";
-}
-
 async function endGame() {
   const endTime = Date.now();
   const totalTime = Math.round((endTime - startTime) / 1000);
@@ -369,15 +361,14 @@ async function endGame() {
   leaderboard.push(newEntry);
   localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
 
-  showLoading();
-  showNotification("Đang tạo thiệp, xin hãy chờ ít phút 💖.", "success");
+  showLoading("Đang tạo thiệp, xin chờ ít phút... 💖");
   // Gửi lên Google Sheets (backup) - không chờ, để redirect nhanh
   if (GOOGLE_SHEETS_CONFIG.enabled) {
     await sendToGoogleSheets(newEntry).catch(() => {});
   }
 
-  // Chuyển hướng đến thiệp chúc mừng thay vì hiển thị màn hình kết quả
   hideLoading();
+  // Chuyển hướng đến thiệp chúc mừng thay vì hiển thị màn hình kết quả
   redirectToCelebrationCard();
 }
 
@@ -631,4 +622,73 @@ function showNotification(message, type = "info") {
       }, 300);
     }
   }, 5000);
+}
+
+// --- Overlay & Spinner (JS Dynamic) ---
+(function createLoadingOverlay() {
+  // Tạo overlay
+  const overlay = document.createElement("div");
+  overlay.id = "loading-overlay";
+  overlay.style.cssText = `
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  `;
+
+  // Tạo spinner
+  const spinner = document.createElement("div");
+  spinner.style.cssText = `
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #ff69b4;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+  `;
+
+  // Tạo text loading
+  const text = document.createElement("div");
+  text.id = "loading-text";
+  text.style.cssText = `
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+  `;
+  text.textContent = "Đang tạo thiệp, xin chờ ít phút... 💖";
+
+  overlay.appendChild(spinner);
+  overlay.appendChild(text);
+  document.body.appendChild(overlay);
+
+  // Tạo keyframes animation spinner
+  const style = document.createElement("style");
+  style.textContent = `
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  `;
+  document.head.appendChild(style);
+})();
+
+// Hiển thị overlay
+function showLoading(message = "Đang tải...") {
+  const overlay = document.getElementById("loading-overlay");
+  if (overlay) {
+    const text = document.getElementById("loading-text");
+    if (text) text.textContent = message;
+    overlay.style.display = "flex";
+  }
+}
+
+// Ẩn overlay
+function hideLoading() {
+  const overlay = document.getElementById("loading-overlay");
+  if (overlay) overlay.style.display = "none";
 }
