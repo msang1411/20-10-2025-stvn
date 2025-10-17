@@ -332,6 +332,14 @@ function getFormattedNow() {
   return `${d}/${m}/${y} ${h}:${min}:${s}`;
 }
 
+function showLoading() {
+  document.getElementById("loading-overlay").style.display = "flex";
+}
+
+function hideLoading() {
+  document.getElementById("loading-overlay").style.display = "none";
+}
+
 async function endGame() {
   const endTime = Date.now();
   const totalTime = Math.round((endTime - startTime) / 1000);
@@ -361,6 +369,7 @@ async function endGame() {
   leaderboard.push(newEntry);
   localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
 
+  showLoading();
   showNotification("Đang tạo thiệp, xin hãy chờ ít phút 💖.", "success");
   // Gửi lên Google Sheets (backup) - không chờ, để redirect nhanh
   if (GOOGLE_SHEETS_CONFIG.enabled) {
@@ -368,6 +377,7 @@ async function endGame() {
   }
 
   // Chuyển hướng đến thiệp chúc mừng thay vì hiển thị màn hình kết quả
+  hideLoading();
   redirectToCelebrationCard();
 }
 
